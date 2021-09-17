@@ -1,3 +1,4 @@
+const { DataTypes } = require("sequelize");
 const Player = require("./player.model");
 
 exports.addPlayer = async (playerObj) => {
@@ -17,3 +18,22 @@ exports.listPLayer = async () => {
         console.log(error);
     }
 };
+
+exports.updatePlayer = async (updateObj) => {
+    try {
+        await Player.update({nation: updateObj.nation, position: updateObj.position, currentVar: updateObj.currentVar},
+           { where: { name: updateObj.filter}});
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+exports.deletePlayer = async (deleteObj) =>{
+    try {
+        await Player.destroy({where: {
+            name: deleteObj.filter
+        }})
+    } catch (error) {
+        console.log(error)
+    }
+}
